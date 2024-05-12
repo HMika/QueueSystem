@@ -4,7 +4,9 @@ import com.example.ticketingqueuesystem.domain.Ticket;
 import com.example.ticketingqueuesystem.service.TicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedList;
@@ -14,7 +16,7 @@ import java.util.Queue;
 public class TicketController {
 
     private final TicketService ticketService;
-    Queue<Ticket> tickets = new LinkedList<>();
+    private Queue<Ticket> tickets = new LinkedList<>();
 
 
     public TicketController(TicketService ticketService) {
@@ -30,7 +32,7 @@ public class TicketController {
         return ResponseEntity.ok(tickets.peek());
     }
 
-    @GetMapping("/issueNewTicket")
+    @PostMapping("/issueNewTicket")
     public ResponseEntity<Ticket> issueNewTicket(){
         Ticket takenTicket = ticketService.addToQueue(tickets);
         tickets.add(takenTicket);
@@ -47,7 +49,7 @@ public class TicketController {
         return ResponseEntity.ok(tickets);
     }
 
-    @GetMapping("/takeTheOneOnTheLine")
+    @DeleteMapping("/takeTheOneOnTheLine")
     public ResponseEntity<?> removeFirstTicketFromQueue(){
         if (tickets.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body("The ticket queue is empty.");

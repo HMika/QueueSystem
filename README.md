@@ -15,7 +15,7 @@ This application is a simple queue system built with Spring Boot. It provides a 
 | Method | Endpoint               | Description                             |
 |--------|------------------------|-----------------------------------------|
 | GET    | `/peekCurrentTicket`   | Returns the current ticket.             |
-| GET    | `/issueNewTicket`      | Adds a new ticket to the queue.         |
+| POST   | `/issueNewTicket`      | Adds a new ticket to the queue.         |
 | GET    | `/getCurrentQueueSize` | Returns the size of the queue.          |
 | GET    | `/listAllTickets`      | Lists all the tickets in the queue.     |
-| GET    | `/takeTheOneOnTheLine` | Removes the first ticket from the queue.|
+| DELETE | `/takeTheOneOnTheLine` | Removes the first ticket from the queue.|
